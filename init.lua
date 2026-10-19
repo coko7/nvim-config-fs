@@ -24,15 +24,15 @@ vim.opt.relativenumber = true
 -- Share vim clipboard with system clipboard (unnamedplus)
 -- `vim.schedule` -> defer clipboard configuration to improve startup time
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+    vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Enable highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- Set <space> as the leader key
@@ -54,8 +54,8 @@ vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 
 -- Specific to vim-tmux-navigator
-vim.g.tmux_navigator_no_mappings = 1        -- skip if you want the default <C-hjkl>
-vim.g.tmux_navigator_save_on_switch = 2     -- optional: :wall when leaving nvim
+vim.g.tmux_navigator_no_mappings = 1    -- skip if you want the default <C-hjkl>
+vim.g.tmux_navigator_save_on_switch = 2 -- optional: :wall when leaving nvim
 vim.g.tmux_navigator_disable_when_zoomed = 1
 
 --------------------------------------------
@@ -66,11 +66,11 @@ vim.g.tmux_navigator_disable_when_zoomed = 1
 --------------------------------------------
 
 vim.api.nvim_create_user_command("Shebang", function()
-  local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
-  if first_line:sub(1, 2) == "#!" then
-    return
-  end
-  vim.api.nvim_buf_set_lines(0, 0, 0, false, { "#!/usr/bin/env bash", "" })
+    local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
+    if first_line:sub(1, 2) == "#!" then
+        return
+    end
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, { "#!/usr/bin/env bash", "" })
 end, {})
 
 ----------------------------------
@@ -87,15 +87,16 @@ vim.pack.add({
     -- * Invoke with `:VimBeGood`
     { src = "https://github.com/folke/snacks.nvim" },
     -- Highlighted TODO comments
-	{ src = "https://github.com/folke/todo-comments.nvim", },
-	{ src = "https://github.com/ThePrimeagen/vim-be-good", },
-	{ src = "https://github.com/rose-pine/neovim", name = "rose-pine", },
+    { src = "https://github.com/folke/todo-comments.nvim", },
+    { src = "https://github.com/ThePrimeagen/vim-be-good", },
+    { src = "https://github.com/rose-pine/neovim", name = "rose-pine", },
     { src = "https://github.com/christoomey/vim-tmux-navigator" },
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
     -- Keystroke recorder
-	{
-		src = "https://github.com/NStefan002/screenkey.nvim",
-		version = "v2.4.2",
-	},
+    {
+        src = "https://github.com/NStefan002/screenkey.nvim",
+        version = "v2.4.2",
+    },
 })
 
 -- Configure plugins
@@ -131,21 +132,21 @@ map("n", "<leader>rk", "<cmd>Screenkey toggle<CR>", { desc = "Toggle Screen Key 
 map("x", "<leader>p", [["_dP]], { desc = "[P]aste over void" })
 
 -- Snacks keymaps:
-map("n", "<leader>e",       function() Snacks.explorer() end,              { desc = "File explorer" })
-map("n", "<leader><space>", function() Snacks.picker.smart() end,          { desc = "Smart find files" })
-map("n", "<leader>ff",      function() Snacks.picker.files() end,          { desc = "Find files" })
-map("n", "<leader>fr",      function() Snacks.picker.recent() end,         { desc = "Recent files" })
-map("n", "<leader>sg",      function() Snacks.picker.grep() end,           { desc = "Live grep" })
-map("n", "<leader>sb",      function() Snacks.picker.buffers() end,        { desc = "Buffers" })
-map("n", "<leader>sh",      function() Snacks.picker.help() end,           { desc = "Help tags" })
-map("n", "<leader>sk",      function() Snacks.picker.keymaps() end,        { desc = "Keymaps" })
-map("n", "<leader>sw",      function() Snacks.picker.grep_word() end,      { desc = "Grep word under cursor" })
+map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File explorer" })
+map("n", "<leader><space>", function() Snacks.picker.smart() end, { desc = "Smart find files" })
+map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find files" })
+map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent files" })
+map("n", "<leader>sg", function() Snacks.picker.grep() end, { desc = "Live grep" })
+map("n", "<leader>sb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help tags" })
+map("n", "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" })
+map("n", "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Grep word under cursor" })
 
 -- Tmux compatibility
 local opts = { silent = true }
-map({ 'n', 'v' }, '<C-Left>',  '<cmd>TmuxNavigateLeft<cr>',  opts)
-map({ 'n', 'v' }, '<C-Down>',  '<cmd>TmuxNavigateDown<cr>',  opts)
-map({ 'n', 'v' }, '<C-Up>',    '<cmd>TmuxNavigateUp<cr>',    opts)
+map({ 'n', 'v' }, '<C-Left>', '<cmd>TmuxNavigateLeft<cr>', opts)
+map({ 'n', 'v' }, '<C-Down>', '<cmd>TmuxNavigateDown<cr>', opts)
+map({ 'n', 'v' }, '<C-Up>', '<cmd>TmuxNavigateUp<cr>', opts)
 map({ 'n', 'v' }, '<C-Right>', '<cmd>TmuxNavigateRight<cr>', opts)
 
 -- Custom keymaps:
